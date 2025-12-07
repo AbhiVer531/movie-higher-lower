@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const GameResult = require("../models/GameResult");
 
-// Needed for POST parsing
 router.use(express.urlencoded({ extended: true }));
 
 const movieList = [
@@ -11,10 +10,8 @@ const movieList = [
   "Forrest Gump", "Gladiator", "Titanic"
 ];
 
-// GET /game — fetch a real movie
 router.get("/", async (req, res) => {
   try {
-    // Ensure session ID exists
     if (!req.session.currentSessionId) {
       req.session.currentSessionId = 1;
     }
@@ -50,7 +47,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// POST /game/guess
 router.post("/guess", async (req, res) => {
   const guess = req.body.guess;
   const movie = JSON.parse(decodeURIComponent(req.body.movieData));
@@ -64,7 +60,6 @@ router.post("/guess", async (req, res) => {
 
   const sessionId = req.session.currentSessionId;
 
-  // Save result
   await GameResult.create({
     sessionId,
     movieTitle: movie.Title,
@@ -74,9 +69,8 @@ router.post("/guess", async (req, res) => {
     correct: wasCorrect
   });
 
-  // If user guesses wrong → end session
   if (!wasCorrect) {
-    req.session.currentSessionId += 1; // next session will start on next Start Game
+    req.session.currentSessionId += 1; 
     res.render("result", {
       movie,
       fakeRating,
@@ -88,7 +82,6 @@ router.post("/guess", async (req, res) => {
     return;
   }
 
-  // If correct → continue game
   res.render("result", {
     movie,
     fakeRating,

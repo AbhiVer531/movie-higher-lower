@@ -7,7 +7,6 @@ const session = require("express-session");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Mongoose connect
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("Connected to MongoDB Atlas"))
   .catch(err => console.error("MongoDB connection error:", err));
@@ -18,7 +17,6 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
-// SESSION SETUP
 app.use(
   session({
     secret: "movie_higher_lower_secret_key",
@@ -27,14 +25,12 @@ app.use(
   })
 );
 
-// ROUTER SETUP
 const gameRouter = require("./routes/gameRouter");
 app.use("/game", gameRouter);
 
 const historyRouter = require("./routes/historyRouter");
 app.use("/history", historyRouter);
 
-// RESET ALL DATA
 const GameResult = require("./models/GameResult");
 
 app.post("/reset", async (req, res) => {
@@ -43,7 +39,6 @@ app.post("/reset", async (req, res) => {
   res.redirect("/");
 });
 
-// HOME PAGE
 app.get("/", (req, res) => {
   if (!req.session.currentSessionId) {
     req.session.currentSessionId = 1;

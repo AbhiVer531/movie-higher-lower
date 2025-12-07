@@ -5,16 +5,14 @@ const GameResult = require("../models/GameResult");
 router.get("/", async (req, res) => {
   const results = await GameResult.find().sort({ timestamp: -1 });
 
-  // Group by sessionId
   const sessions = {};
   results.forEach(r => {
     if (!sessions[r.sessionId]) sessions[r.sessionId] = [];
     sessions[r.sessionId].push(r);
   });
 
-  // Convert to sorted array
   const sessionArray = Object.keys(sessions)
-    .sort((a, b) => b - a) // newest first
+    .sort((a, b) => b - a)
     .map(sessionId => ({
       sessionId,
       rounds: sessions[sessionId],
