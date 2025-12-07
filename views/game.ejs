@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Higher-Lower Movie Game</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+
+    <h1>Higher-Lower Movie Game</h1>
+
+    <h2><%= movieTitle %> (<%= movieYear %>)</h2>
+
+    <% if (posterUrl !== "N/A") { %>
+        <img src="<%= posterUrl %>" alt="Movie Poster" style="width:200px;">
+    <% } %>
+
+    <p><strong>Plot:</strong> <%= moviePlot %></p>
+
+    <p><strong>Fake Rating Shown to User:</strong> <%= fakeRating %></p>
+
+    <form action="/game/guess" method="POST">
+        <input type="hidden" name="movieData" value="<%- encodeURIComponent(JSON.stringify({
+            Title: movieTitle,
+            fakeRating: fakeRating,
+            realRating: realRating,
+            Poster: posterUrl,
+            Plot: moviePlot,
+            Year: movieYear
+        })) %>">
+
+        <button type="submit" name="guess" value="higher">Higher</button>
+        <button type="submit" name="guess" value="lower">Lower</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<body>
+    <%- include("partials/header") %> 
+  
+    <h1>Round Result</h1>
+  
+    <p>Movie: <%= movie.Title %></p>
+    <p>Your Guess: <%= guess %></p>
+    <p>Fake Rating Shown: <%= fakeRating %></p>
+    <p>Real Rating: <%= realRating %></p>
+  
+    <% if (wasCorrect) { %>
+        <h2 style="color: green;">Correct! 🎉</h2>
+        <a href="/game">Next Round</a>
+    <% } else { %>
+        <h2 style="color: red;">Incorrect — Session Ended 😢</h2>
+        <a href="/game">Play Again (New Session)</a> |
+        <a href="/">Home</a>
+    <% } %>
+  </body>
+  

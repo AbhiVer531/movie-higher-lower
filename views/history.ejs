@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Game History</title>
+  <script>
+    function toggle(id) {
+      const section = document.getElementById(id);
+      section.style.display = section.style.display === "none" ? "block" : "none";
+    }
+  </script>
+</head>
+
+<body>
+  <%- include("partials/header") %>
+
+  <h1>Game History</h1>
+
+  <% sessionArray.forEach(session => { %>
+      <h2>
+        Game Session <%= session.sessionId %>
+        (Accuracy: <%= session.accuracy %>% — <%= session.correct %>/<%= session.total %> correct)
+        <button onclick="toggle('session_<%= session.sessionId %>')">Toggle</button>
+      </h2>
+
+      <div id="session_<%= session.sessionId %>" style="display:none; margin-bottom:20px;">
+        <table border="1" cellpadding="8">
+          <tr>
+            <th>Movie</th>
+            <th>Fake</th>
+            <th>Real</th>
+            <th>Your Guess</th>
+            <th>Correct?</th>
+            <th>Time</th>
+          </tr>
+
+          <% session.rounds.forEach(r => { %>
+             <tr>
+                <td><%= r.movieTitle %></td>
+                <td><%= r.fakeRating %></td>
+                <td><%= r.realRating %></td>
+                <td><%= r.userGuess %></td>
+                <td><%= r.correct ? "✅" : "❌" %></td>
+                <td><%= r.timestamp.toLocaleString() %></td>
+             </tr>
+          <% }) %>
+        </table>
+      </div>
+  <% }) %>
+
+  <form action="/reset" method="POST">
+    <button type="submit" style="margin-top:20px;">Reset All History</button>
+  </form>
+
+</body>
+</html>
