@@ -30,7 +30,7 @@ router.get("/", async (req, res) => {
     const posterUrl = movieData.Poster;
     const moviePlot = movieData.Plot;
 
-    const fakeRating = (Math.random() * 10).toFixed(1);
+    const fakeRating = (Math.random() * 5 + 5).toFixed(1);
 
     res.render("game", {
       movieTitle,
