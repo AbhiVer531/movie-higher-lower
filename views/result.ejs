@@ -1,20 +1,32 @@
-<body>
-    <%- include("partials/header") %> 
-  
-    <h1>Round Result</h1>
-  
-    <p>Movie: <%= movie.Title %></p>
-    <p>Your Guess: <%= guess %></p>
-    <p>Fake Rating Shown: <%= fakeRating %></p>
-    <p>Real Rating: <%= realRating %></p>
-  
-    <% if (wasCorrect) { %>
-        <h2 style="color: green;">Correct! 🎉</h2>
-        <a href="/game">Next Round</a>
-    <% } else { %>
-        <h2 style="color: red;">Incorrect — Session Ended 😢</h2>
-        <a href="/game">Play Again (New Session)</a> |
-        <a href="/">Home</a>
-    <% } %>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Round Result</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="page">
+    <div class="pageGradient"></div>
+    <div class="pageContent">
+        <%- include("partials/header") %> 
+        <main class="card cardCenter">
+            <p class="eyebrow">Round Result</p>
+            <h1><%= movie.Title %></h1>
+            <div class="pill">Fake: <%= fakeRating %> · Real: <%= realRating %></div>
+            <p class="caps">Your guess: <%= guess %></p>
+
+            <% if (wasCorrect) { %>
+                <h2 class="status statusSuccess">Correct! 🎉</h2>
+                <a class="btn btnPrimary" href="/game">Next Round</a>
+            <% } else { %>
+                <h2 class="status statusError">Incorrect — Session Ended 😢</h2>
+                <div class="actions">
+                    <a class="btn btnPrimary" href="/game">Play Again</a>
+                    <a class="btn btnGhost" href="/">Home</a>
+                </div>
+            <% } %>
+        </main>
+    </div>
+</body>
+</html>
   

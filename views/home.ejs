@@ -3,17 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Higher-Lower Movie Game</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
-<body>
-    <%- include("partials/header") %>
-
-    <h1>Welcome to Higher-Lower Movie Game!</h1>
-    <p>This is the start of your final project 🎬</p>
-
-    <a href="/game">Start Game</a>
-
-    <form action="/reset" method="POST">
-        <button type="submit">Reset History</button>
-    </form>      
+<body class="page">
+    <div class="pageGradient"></div>
+    <div class="pageContent">
+        <%- include("partials/header") %>
+        <main class="card cardCenter">
+            <h1 class="heroTitle">Higher-Lower Movie Game</h1>
+            <p class="heroSubtitle">Test your movie intuition by guessing if the real IMDb rating is higher or lower than the decoy.</p>
+            <div class="actions">
+                <a class="btn btnPrimary" href="/game">Start Game</a>
+                <form action="/reset" method="POST">
+                    <button class="btn btnGhost" type="submit">Reset History</button>
+                </form>
+            </div>
+        </main>
+    </div>
 </body>
 </html>

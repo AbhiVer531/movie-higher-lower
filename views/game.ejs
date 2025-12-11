@@ -3,34 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Higher-Lower Movie Game</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
-<body>
-    <%- include("partials/header") %>
+<body class="page">
+    <div class="pageGradient"></div>
+    <div class="pageContent">
+        <%- include("partials/header") %>
+        <main class="card">
+            <header class="cardHeader">
+                <div>
+                    <p class="eyebrow">Now Playing</p>
+                    <h1><%= movieTitle %> (<%= movieYear %>)</h1>
+                </div>
+                <div class="pill">Fake rating: <%= fakeRating %></div>
+            </header>
 
-    <h1>Higher-Lower Movie Game</h1>
-
-    <h2><%= movieTitle %> (<%= movieYear %>)</h2>
-
-    <% if (posterUrl !== "N/A") { %>
-        <img src="<%= posterUrl %>" alt="Movie Poster" style="width:200px;">
-    <% } %>
-
-    <p><strong>Plot:</strong> <%= moviePlot %></p>
-
-    <p><strong>Fake Rating Shown to User:</strong> <%= fakeRating %></p>
-
-    <form action="/game/guess" method="POST">
-        <input type="hidden" name="movieData" value="<%- encodeURIComponent(JSON.stringify({
-            Title: movieTitle,
-            fakeRating: fakeRating,
-            realRating: realRating,
-            Poster: posterUrl,
-            Plot: moviePlot,
-            Year: movieYear
-        })) %>">
-
-        <button type="submit" name="guess" value="higher">Higher</button>
-        <button type="submit" name="guess" value="lower">Lower</button>
-    </form>
+            <div class="movie">
+                <% if (posterUrl !== "N/A") { %>
+                    <img class="moviePoster" src="<%= posterUrl %>" alt="Movie Poster">
+                <% } %>
+                <div class="movieInfo">
+                    <p class="moviePlot"><%= moviePlot %></p>
+                    <form class="actions" action="/game/guess" method="POST">
+                        <input type="hidden" name="movieData" value="<%- encodeURIComponent(JSON.stringify({
+                            Title: movieTitle,
+                            fakeRating: fakeRating,
+                            realRating: realRating,
+                            Poster: posterUrl,
+                            Plot: moviePlot,
+                            Year: movieYear
+                        })) %>">
+                        <button class="btn btnPrimary" type="submit" name="guess" value="higher">Higher</button>
+                        <button class="btn btnAccent" type="submit" name="guess" value="lower">Lower</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
 </body>
 </html>

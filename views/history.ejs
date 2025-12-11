@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Game History</title>
+  <link rel="stylesheet" href="/style.css">
   <script>
     function toggle(id) {
       const section = document.getElementById(id);
@@ -11,46 +12,65 @@
   </script>
 </head>
 
-<body>
-  <%- include("partials/header") %>
+<body class="page">
+  <div class="pageGradient"></div>
+  <div class="pageContent">
+    <%- include("partials/header") %>
+    <main class="card">
+      <header class="cardHeader">
+        <div>
+          <p class="eyebrow">Past Rounds</p>
+          <h1>Game History</h1>
+        </div>
+      </header>
 
-  <h1>Game History</h1>
+      <% sessionArray.forEach(session => { %>
+        <section class="session">
+          <div class="sessionHeader">
+            <div>
+              <p class="eyebrow">Session</p>
+              <h2>#<%= session.sessionId %></h2>
+            </div>
+            <div class="pill">
+              Accuracy: <%= session.accuracy %>% · <%= session.correct %>/<%= session.total %>
+            </div>
+            <button class="btn btnGhost" type="button" onclick="toggle('session_<%= session.sessionId %>')">Toggle</button>
+          </div>
 
-  <% sessionArray.forEach(session => { %>
-      <h2>
-        Game Session <%= session.sessionId %>
-        (Accuracy: <%= session.accuracy %>% — <%= session.correct %>/<%= session.total %> correct)
-        <button onclick="toggle('session_<%= session.sessionId %>')">Toggle</button>
-      </h2>
+          <div id="session_<%= session.sessionId %>" class="sessionTable" style="display:none;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Movie</th>
+                  <th>Fake</th>
+                  <th>Real</th>
+                  <th>Your Guess</th>
+                  <th>Correct?</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% session.rounds.forEach(r => { %>
+                  <tr>
+                    <td><%= r.movieTitle %></td>
+                    <td><%= r.fakeRating %></td>
+                    <td><%= r.realRating %></td>
+                    <td class="caps"><%= r.userGuess %></td>
+                    <td><%= r.correct ? "✅" : "❌" %></td>
+                    <td><%= r.timestamp.toLocaleString() %></td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      <% }) %>
 
-      <div id="session_<%= session.sessionId %>" style="display:none; margin-bottom:20px;">
-        <table border="1" cellpadding="8">
-          <tr>
-            <th>Movie</th>
-            <th>Fake</th>
-            <th>Real</th>
-            <th>Your Guess</th>
-            <th>Correct?</th>
-            <th>Time</th>
-          </tr>
-
-          <% session.rounds.forEach(r => { %>
-             <tr>
-                <td><%= r.movieTitle %></td>
-                <td><%= r.fakeRating %></td>
-                <td><%= r.realRating %></td>
-                <td><%= r.userGuess %></td>
-                <td><%= r.correct ? "✅" : "❌" %></td>
-                <td><%= r.timestamp.toLocaleString() %></td>
-             </tr>
-          <% }) %>
-        </table>
-      </div>
-  <% }) %>
-
-  <form action="/reset" method="POST">
-    <button type="submit" style="margin-top:20px;">Reset All History</button>
-  </form>
+      <form class="actions" action="/reset" method="POST">
+        <button class="btn btnGhost" type="submit">Reset All History</button>
+      </form>
+    </main>
+  </div>
 
 </body>
 </html>
