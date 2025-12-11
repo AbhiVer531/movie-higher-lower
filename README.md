@@ -2,7 +2,7 @@
 
 **Submitted by:** [Your Name] ([Your Directory ID])
 
-**Group Members:** Abhinav Verma([118972497]), ...
+**Group Members:** [Abhinav Verma] ([118972497]), [Armin Moattari] ([119858431]),...
 
 **App Description:** A fun movie guessing game where players test their movie knowledge by predicting whether the real IMDb rating is higher or lower than a fake rating shown for each film. Track your accuracy and compete against your own streaks!
 
