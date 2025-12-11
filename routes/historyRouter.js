@@ -18,7 +18,8 @@ router.get("/", async (req, res) => {
       rounds: sessions[sessionId],
       correct: sessions[sessionId].filter(r => r.correct).length,
       total: sessions[sessionId].length,
-      accuracy: ((sessions[sessionId].filter(r => r.correct).length) / sessions[sessionId].length * 100).toFixed(1)
+      accuracy: ((sessions[sessionId].filter(r => r.correct).length) / sessions[sessionId].length * 100).toFixed(1),
+      difficulty: sessions[sessionId][0]?.difficulty || "unknown"
     }));
 
   res.render("history", { sessionArray });

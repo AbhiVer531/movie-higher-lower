@@ -154,9 +154,14 @@ a:hover {
 }
 
 .actions {
-  display: flex;
+  /* display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  align-items: center; */
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   align-items: center;
 }
 
@@ -259,4 +264,26 @@ a:hover {
   .sessionHeader {
     grid-template-columns: 1fr;
   }
+}
+
+.caps {
+  font-size: 0.8em;
+  font-weight: normal;
+}
+
+.radioDiv {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.radioDiv label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+form {
+  margin: 0.5rem;
 }

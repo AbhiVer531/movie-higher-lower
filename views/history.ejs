@@ -29,7 +29,7 @@
           <div class="sessionHeader">
             <div>
               <p class="eyebrow">Session</p>
-              <h2>#<%= session.sessionId %></h2>
+              <h2>#<%= session.sessionId %> · <span class="caps"><%= session.difficulty %></span></h2>
             </div>
             <div class="pill">
               Accuracy: <%= session.accuracy %>% · <%= session.correct %>/<%= session.total %>
