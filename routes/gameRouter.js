@@ -16,6 +16,18 @@ router.get("/", async (req, res) => {
       req.session.currentSessionId = 1;
     }
 
+    // Get difficulty from query params, default to "easy"
+    const difficulty = req.query.difficulty || req.session.difficulty || "easy";
+    req.session.difficulty = difficulty;
+
+    // Set standard deviation based on difficulty
+    const difficultyMap = {
+      easy: 3,
+      medium: 2,
+      hard: 1
+    };
+    const sd = difficultyMap[difficulty];
+
     const randomMovie = movieList[Math.floor(Math.random() * movieList.length)];
 
     const apiKey = process.env.OMDB_API_KEY;
@@ -31,9 +43,9 @@ router.get("/", async (req, res) => {
     const moviePlot = movieData.Plot;
 
 
-    let fakeRating = clipNumberToRange(gaussianRandom(mean=realRating, stdev=1), 0, 10).toFixed(1);
+    let fakeRating = clipNumberToRange(gaussianRandom(mean=realRating, stdev=sd), 0, 10).toFixed(1);
     while (fakeRating == realRating) {
-      fakeRating = clipNumberToRange(gaussianRandom(mean=realRating, stdev=1), 0, 10).toFixed(1);
+      fakeRating = clipNumberToRange(gaussianRandom(mean=realRating, stdev=sd), 0, 10).toFixed(1);
     }
 
     res.render("game", {
@@ -63,6 +75,7 @@ router.post("/guess", async (req, res) => {
     (guess === "lower" && realRating < fakeRating);
 
   const sessionId = req.session.currentSessionId;
+  const difficulty = req.session.difficulty || "easy";
 
   await GameResult.create({
     sessionId,
@@ -70,7 +83,8 @@ router.post("/guess", async (req, res) => {
     fakeRating,
     realRating,
     userGuess: guess,
-    correct: wasCorrect
+    correct: wasCorrect,
+    difficulty
   });
 
   if (!wasCorrect) {

@@ -7,6 +7,7 @@ const GameResultSchema = new mongoose.Schema({
     realRating: Number,
     userGuess: String,
     correct: Boolean,
+    difficulty: String,
     timestamp: { type: Date, default: Date.now }
 });
 

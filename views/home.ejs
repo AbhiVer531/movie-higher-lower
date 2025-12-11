@@ -12,12 +12,26 @@
         <main class="card cardCenter">
             <h1 class="heroTitle">Higher-Lower Movie Game</h1>
             <p class="heroSubtitle">Test your movie intuition by guessing if the real IMDb rating is higher or lower than the decoy.</p>
-            <div class="actions">
-                <a class="btn btnPrimary" href="/game">Start Game</a>
-                <form action="/reset" method="POST">
-                    <button class="btn btnGhost" type="submit">Reset History</button>
-                </form>
-            </div>
+            <form class="actions" action="/game" method="GET">
+                <div class="radioDiv" >
+                    <label>
+                        <input type="radio" name="difficulty" value="easy" checked>
+                        Easy
+                    </label>
+                    <label>
+                        <input type="radio" name="difficulty" value="medium">
+                        Medium
+                    </label>
+                    <label>
+                        <input type="radio" name="difficulty" value="hard">
+                        Hard
+                    </label>
+                </div>
+                <button class="btn btnPrimary" type="submit">Start Game</button>
+            </form>
+            <form action="/reset" method="POST">
+                <button class="btn btnGhost" type="submit">Reset History</button>
+            </form>
         </main>
     </div>
 </body>
