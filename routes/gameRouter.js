@@ -6,8 +6,13 @@ router.use(express.urlencoded({ extended: true }));
 
 const movieList = [
   "Inception", "The Matrix", "Interstellar", "The Godfather",
-  "The Dark Knight", "Pulp Fiction", "Fight Club",
-  "Forrest Gump", "Gladiator", "Titanic"
+  "The Dark Knight", "Pulp Fiction", "Fight Club", "Forrest Gump",
+  "Gladiator", "Titanic", "The Shawshank Redemption", "Parasite",
+  "Joker", "The Lion King", "Avatar", "Avengers Endgame",
+  "The Silence of the Lambs", "Se7en", "Goodfellas", "The Usual Suspects",
+  "Whiplash", "Moonlight", "La La Land", "Get Out",
+  "A Quiet Place", "Hereditary", "The Lighthouse", "Uncut Gems",
+  "Knives Out", "Dune", "Everything Everywhere All at Once"
 ];
 
 router.get("/", async (req, res) => {
@@ -30,7 +35,18 @@ router.get("/", async (req, res) => {
     const posterUrl = movieData.Poster;
     const moviePlot = movieData.Plot;
 
-    const fakeRating = (Math.random() * 5 + 5).toFixed(1);
+    // Generate fake rating closer to real rating for difficulty
+    const spread = 1.2; // Spread range around real rating
+    const offset = (Math.random() * 2 - 1) * spread;
+    let fakeRating = realRating + offset;
+    
+    // Clamp to [0, 10] and ensure it's not equal to real rating
+    fakeRating = Math.min(10, Math.max(0, fakeRating));
+    if (Math.abs(fakeRating - realRating) < 0.2) {
+      fakeRating = realRating + (fakeRating > realRating ? 0.3 : -0.3);
+      fakeRating = Math.min(10, Math.max(0, fakeRating));
+    }
+    fakeRating = parseFloat(fakeRating.toFixed(1));
 
     res.render("game", {
       movieTitle,
