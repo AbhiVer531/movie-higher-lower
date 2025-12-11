@@ -30,7 +30,9 @@ router.get("/", async (req, res) => {
     const posterUrl = movieData.Poster;
     const moviePlot = movieData.Plot;
 
-    const fakeRating = (Math.random() * 5 + 5).toFixed(1);
+
+    const fakeRating = clipNumberToRange(gaussianRandom(mean=realRating, stdev=1), 0, 10).toFixed(1);
+
 
     res.render("game", {
       movieTitle,
@@ -91,5 +93,19 @@ router.post("/guess", async (req, res) => {
     sessionEnded: false
   });
 });
+
+// Standard Normal variate using Box-Muller transform.
+function gaussianRandom(mean = 0, stdev = 1) {
+  const u = 1 - Math.random(); // Converting [0,1) to (0,1]
+  const v = Math.random();
+  const z = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+  // Transform to the desired mean and standard deviation:
+  return z * stdev + mean;
+}
+
+// clip to range 0-10 (both exclusive)
+function clipNumberToRange(num, min, max) {
+  return Math.min(Math.max(num, min+0.1), max-0.1);
+}
 
 module.exports = router;
