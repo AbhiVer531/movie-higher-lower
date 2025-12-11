@@ -31,8 +31,10 @@ router.get("/", async (req, res) => {
     const moviePlot = movieData.Plot;
 
 
-    const fakeRating = clipNumberToRange(gaussianRandom(mean=realRating, stdev=1), 0, 10).toFixed(1);
-
+    let fakeRating = clipNumberToRange(gaussianRandom(mean=realRating, stdev=1), 0, 10).toFixed(1);
+    while (fakeRating == realRating) {
+      fakeRating = clipNumberToRange(gaussianRandom(mean=realRating, stdev=1), 0, 10).toFixed(1);
+    }
 
     res.render("game", {
       movieTitle,
