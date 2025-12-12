@@ -17,11 +17,11 @@
 
             <% if (wasCorrect) { %>
                 <h2 class="status statusSuccess">Correct! 🎉</h2>
-                <a class="btn btnPrimary" href="/game">Next Round</a>
+                <a class="btn btnPrimary" href="/game?difficulty=<%= difficulty %>">Next Round</a>
             <% } else { %>
                 <h2 class="status statusError">Incorrect — Session Ended 😢</h2>
                 <div class="actions">
-                    <a class="btn btnPrimary" href="/game">Play Again</a>
+                    <a class="btn btnPrimary" href="/game?difficulty=<%= difficulty %>">Play Again</a>
                     <a class="btn btnGhost" href="/">Home</a>
                 </div>
             <% } %>

@@ -95,7 +95,8 @@ router.post("/guess", async (req, res) => {
       realRating,
       guess,
       wasCorrect,
-      sessionEnded: true
+      sessionEnded: true,
+      difficulty
     });
     return;
   }
@@ -106,7 +107,8 @@ router.post("/guess", async (req, res) => {
     realRating,
     guess,
     wasCorrect,
-    sessionEnded: false
+    sessionEnded: false,
+    difficulty
   });
 });
 
