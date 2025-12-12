@@ -6,14 +6,14 @@
 
 **App Description:** A fun movie guessing game where players test their movie knowledge by predicting whether the real IMDb rating is higher or lower than a fake rating shown for each film. Track your accuracy and compete against your own streaks!
 
-**YouTube Video Link:** [Insert your YouTube demo link here]
+**YouTube Video Link:** [(https://youtu.be/ORjXKpUDoMg)]
 
 **APIs Used:**
 - [OMDB API](https://www.omdbapi.com/) - Fetches real movie data and IMDb ratings
 
 **Contact Email:** [Your email address]
 
-**Deployed App Link:** [Insert your deployment link here (e.g., Render, Heroku)]
+**Deployed App Link:** [https://movie-higher-lower.onrender.com]
 
 ---
 
