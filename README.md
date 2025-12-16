@@ -1,6 +1,6 @@
 # Higher-Lower Movie Game
 
-**Submitted by:** [Your Name] ([Your Directory ID])
+**Submitted by:** [Abhinav Verma] ([118972497])
 
 **Group Members:** [Abhinav Verma] ([118972497]), [Armin Moattari] ([119858431]), [Justin Chai] ([jchai])
 
@@ -11,7 +11,7 @@
 **APIs Used:**
 - [OMDB API](https://www.omdbapi.com/) - Fetches real movie data and IMDb ratings
 
-**Contact Email:** [Your email address]
+**Contact Email:** averma10@terpmail.umd.edu
 
 **Deployed App Link:** [https://movie-higher-lower.onrender.com]
 
